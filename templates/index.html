@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Análise de Cobertura de Transporte Público</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://unpkg.com/maplibre-gl@1.15.2/dist/maplibre-gl.css" rel="stylesheet" />
+    <script src="https://unpkg.com/maplibre-gl@1.15.2/dist/maplibre-gl.js"></script>
+    <script src="https://unpkg.com/deck.gl@8.9.0/dist.min.js"></script>
+</head>
+<body>
+    <div id="map"></div>
+    <!-- Controle de Camadas -->
+    <button id="toggle-layer-control" class="hidden" style="position: absolute; top: 220px; left: 10px; z-index: 2;">🔍 Camadas</button>
+    <div id="layer-control" class="hidden">
+        <h3>Controle de Camadas</h3>
+        <!-- Botão para mostrar/ocultar controle de camadas (oculto inicialmente) -->
+
+        <div class="layer-item">
+            <input type="checkbox" id="coverage-area-layer" checked>
+            <label for="coverage-area-layer">Área de Cobertura</label>
+        </div>
+        <div class="layer-item">
+            <input type="checkbox" id="stops-layer" checked>
+            <label for="stops-layer">Paradas</label>
+        </div>
+        <div class="layer-item">
+            <input type="checkbox" id="population-layer" checked>
+            <label for="population-layer">População Coberta/Não Coberta</label>
+        </div>
+        <div class="layer-item">
+            <input type="checkbox" id="clusters-layer" checked>
+            <label for="clusters-layer">Clusters de População Não Coberta</label>
+        </div>
+    </div>
+
+    <div id="slider-container" class="hidden">
+        <h3>Ajustes</h3>
+        <label class="slider-label" for="buffer-slider">Buffer (metros):</label>
+        <div class="slider-values">
+            <input type="range" id="buffer-slider" min="100" max="3000" value="500">
+            <div id="buffer-value" class="slider-value">500</div>
+        </div><br><br>
+        <label class="slider-label" for="cluster-slider">Min-População para formação de um cluster (metros):</label>
+        <div class="slider-values">
+            <input type="range" id="cluster-slider" min="0" max="10000" value="500">
+            <div id="cluster-value" class="slider-value">500</div>
+        </div><br>
+        <div id="errorsDiv" style="color: red;"></div>
+        <br>
+        <button id="generate-clusters" type="submit">Gerar Clusters</button>
+    </div>
+    
+    <div id="legend" class="hidden">
+        <h3>Legenda</h3>
+        <div class="legend-item">
+            <span class="legend-color coverage-area"></span>
+            <span class="legend-label">Coverage (Buffers Azuis)</span>
+        </div>
+        <div class="legend-item">
+            <span class="legend-color stops"></span>
+            <span class="legend-label">Stops (Pontos Azuis)</span>
+        </div>
+        <div class="legend-item">
+            <span class="legend-color population-covered"></span>
+            <span class="legend-label">População Coberta (Pontos Verdes)</span>
+        </div>
+        <div class="legend-item">
+            <span class="legend-color population-uncovered"></span>
+            <span class="legend-label">População Não Coberta (Pontos Vermelhos)</span>
+        </div>
+        <div class="legend-item">
+            <span class="legend-color clusters"></span>
+            <span class="legend-label">Clusters de População Não Coberta</span>
+        </div>
+    </div>
+    
+    <div class="upload-form" id="upload-form">
+        <h1>Análise de Cobertura de Transporte Público</h1>
+        <form id="data-form">
+            <div>
+                <label>Upload do Arquivo de Paradas GTFS (stops.txt):</label>
+                <input type="file" id="gtfsFile" accept=".txt" required>
+            </div>
+            <div>
+                <label>Upload dos Dados de População (CSV):</label>
+                <input type="file" id="populationFile" accept=".csv" required>
+            </div>
+            <button type="submit">Analisar Cobertura</button>
+            <div class="errors" id="errors"></div>
+        </form>
+    </div>
+    
+    <!-- Inclua o seu main.js -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

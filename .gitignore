@@ -1,0 +1,5 @@
+/venv
+/notebooks
+/data
+.vscode/
+__pycache__/

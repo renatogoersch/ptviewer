@@ -1,0 +1,288 @@
+/* Reset básico */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+#map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#deck-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Permite interações no MapLibre GL */
+    z-index: 1; /* Abaixo do upload-form */
+}
+
+/* Formulário de Upload */
+.upload-form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    border-radius: 8px;
+    z-index: 2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.upload-form h1 {
+    margin-top: 0;
+    text-align: center;
+}
+
+.upload-form form div {
+    margin-bottom: 15px;
+}
+
+.upload-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.upload-form input[type="file"] {
+    display: block;
+    width: 100%;
+}
+
+.upload-form button {
+    padding: 10px 20px;
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.upload-form button:hover {
+    background-color: #0056b3;
+}
+
+.errors {
+    color: red;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* Legenda do Mapa */
+#legend {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    z-index: 2;
+    width: 320px; /* Mesma largura da legenda */
+}
+
+#legend.hidden {
+    display: none; /* Oculta a legenda */
+}
+
+#legend h3 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    text-align: center;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.legend-item:last-child {
+    margin-bottom: 0;
+}
+
+.legend-color {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    border: 1px solid #000;
+    border-radius: 3px;
+}
+
+.coverage-area {
+    background: rgba(0, 0, 255, 0.2);
+}
+
+.stops {
+    background: rgb(0, 0, 255);
+}
+
+.population-covered {
+    background: rgb(0, 255, 0);
+}
+
+.population-uncovered {
+    background: rgb(255, 0, 0);
+}
+
+.clusters {
+    background: rgb(255, 255, 0);
+}
+
+/* Slider Container */
+#slider-container {
+    position: absolute;
+    bottom: 210px; /* Para que fique logo acima da legenda */
+    left: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    z-index: 2;
+    width: 320px; /* Mesma largura da legenda */
+    margin-bottom: 20px;
+}
+
+#slider-container button {
+    margin: 0 auto;
+    display: block;
+}
+
+#slider-container.hidden {
+    display: none; /* Oculta o slider container */
+}
+
+#slider-container h3 {
+    margin-bottom: 10px;
+    font-size: 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Define um espaçamento consistente entre os elementos */
+}
+
+.slider-label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.slider-values {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.slider-value {
+    position: absolute;
+    top: 20px; /* Posição do valor acima do slider */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 2px 5px;
+    border-radius: 3px;
+    pointer-events: none; /* O valor não deve interferir com o slider */
+    transition: left 0.15s ease-in-out; /* Transição suave para acompanhar o slider */
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%; /* Ajusta a largura do slider */
+    height: 8px;
+    background: #ddd;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity .15s ease-in-out;
+    border-radius: 5px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #007bff;
+    cursor: pointer;
+    transition: background-color .3s ease-in-out;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #007bff;
+    cursor: pointer;
+    transition: background-color .3s ease-in-out;
+}
+
+input[type="range"]:hover {
+    opacity: 1;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    background: #0056b3;
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+    background: #0056b3;
+}
+.hidden {
+    display: none;
+}
+
+/* Estilo para o controle de camadas */
+#layer-control {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    max-width: 200px;
+}
+
+#layer-control h3 {
+    margin-top: 0;
+}
+
+.layer-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.layer-item input {
+    margin-right: 5px;
+}
+
+/* Estilo para o botão de controle de camadas */
+#toggle-layer-control {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
