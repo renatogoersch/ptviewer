@@ -1,5 +1,6 @@
 /venv
 /notebooks
-/data
+/data/cache
+/data/uploads
 .vscode/
 __pycache__/

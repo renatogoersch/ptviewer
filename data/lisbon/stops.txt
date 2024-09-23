@@ -1,0 +1,11 @@
+stop_id,stop_name,stop_lat,stop_lon
+1,Parada Praça do Comércio,38.707750,-9.136591
+2,Parada Rossio,38.714178,-9.139700
+3,Parada Cais do Sodré,38.705774,-9.144879
+4,Parada Marquês de Pombal,38.725299,-9.150036
+5,Parada Avenida,38.719045,-9.141533
+6,Parada Santa Apolónia,38.713833,-9.117999
+7,Parada Oriente,38.768958,-9.095171
+8,Parada Campo Grande,38.759438,-9.156620
+9,Parada Entrecampos,38.743620,-9.148530
+10,Parada Alameda,38.735759,-9.134088
